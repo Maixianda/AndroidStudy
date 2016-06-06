@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RxjavaRetrofitDemo</string>
+    <string name="showtip">显示内容</string>
+</resources>
