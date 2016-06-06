@@ -38,6 +38,7 @@ public class activity_main extends Activity{
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),secondActivity.class);
                 startActivity(intent);
+                //测试下的
             }
         });
     }
