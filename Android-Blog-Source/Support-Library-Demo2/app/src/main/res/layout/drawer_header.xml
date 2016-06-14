@@ -2,21 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#01BCD6"
+    android:background="#01bcd6"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="10dp">
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_people" />
-
+        android:src="@drawable/icon_people"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="UserName"
-        android:textSize="24sp" />
+        android:textSize="15dp"
+        android:text="UserName"/>
 
 </LinearLayout>
