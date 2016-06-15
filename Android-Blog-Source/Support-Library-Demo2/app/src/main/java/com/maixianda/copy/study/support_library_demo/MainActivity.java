@@ -29,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:// 点击返回图标事件,对应的是左上角的点击滑动出抽屉菜单的按钮
+                mDrawerLayout.openDrawer(mNavigationView);//显示抽屉菜单
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void initView() {
         //region 绑定控件
         mToolBar = (Toolbar) findViewById(R.id.tool_bar);
@@ -42,7 +52,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(android.R.drawable.ic_dialog_alert);//设置左上角的按钮图片
-        actionBar.setDisplayHomeAsUpEnabled(true);//设置显示左上角的按钮图片
+        actionBar.setDisplayHomeAsUpEnabled(true);//决定左上角图标的右侧是否有向左的小箭头, true有小箭头，并且图标可以点击
+//        actionBar.setHomeButtonEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(false);
+        // 使左上角图标是否显示，如果设成false，则没有程序图标，仅仅就个标题，
+        // 否则，显示应用程序图标，对应id为android.R.id.home，对应ActionBar.DISPLAY_SHOW_HOME
+
         //endregion 初始化ToolBar
 
         //region 设置左侧菜单的菜单点击响应(也就是对navigationView添加item的监听事件)

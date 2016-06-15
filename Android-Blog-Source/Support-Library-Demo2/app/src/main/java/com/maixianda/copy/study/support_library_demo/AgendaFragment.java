@@ -30,7 +30,6 @@ public class AgendaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // TODO: 2016/6/15 9:40 写布局,需要把布局加载进来
         mRoot = (LinearLayout) inflater.inflate(R.layout.agenda_fragment,container,false);
         return mRoot;
     }
