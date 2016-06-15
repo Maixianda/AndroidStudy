@@ -21,8 +21,8 @@ public class ShareFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mParentView = inflater.inflate(R.layout.share_fragment,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mParentView = inflater.inflate(R.layout.share_fragment, container, false);
         return mParentView;
     }
 
@@ -31,9 +31,10 @@ public class ShareFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mRecyclerView = (RecyclerView) mParentView.findViewById(R.id.recycler_view);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        LinearLayoutManager manager = new LinearLayoutManager(mRecyclerView.getContext());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity()));
     }
 }

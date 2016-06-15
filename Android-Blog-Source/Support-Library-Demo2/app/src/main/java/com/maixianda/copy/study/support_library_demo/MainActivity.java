@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new InfoDetailsFragment());
         fragments.add(new ShareFragment());
+        fragments.add(new AgendaFragment());
         // TODO: 2016/6/14 15:28 编写各种fragment
         //endregion 初始化ViewPager的数据集
         //region 创建ViewPager的adapter

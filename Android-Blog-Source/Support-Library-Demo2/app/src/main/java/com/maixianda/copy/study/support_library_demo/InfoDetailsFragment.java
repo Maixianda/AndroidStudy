@@ -17,10 +17,11 @@ import android.view.ViewGroup;
  */
 public class InfoDetailsFragment extends Fragment {
     private RecyclerView mRecyclerView;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRecyclerView = (RecyclerView) inflater.inflate(R.layout.info_details_fragment,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mRecyclerView = (RecyclerView) inflater.inflate(R.layout.info_details_fragment, container, false);
         return mRecyclerView;
     }
 
@@ -29,6 +30,6 @@ public class InfoDetailsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(this.getActivity()));
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity()));
     }
 }

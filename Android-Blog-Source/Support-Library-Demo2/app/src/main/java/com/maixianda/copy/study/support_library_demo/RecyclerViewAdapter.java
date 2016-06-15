@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.security.PublicKey;
-
 /**
  * Created by Administrator on 2016/6/14.
  * 说明:
@@ -25,30 +23,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
+
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView view = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TextView view = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         holder.mTextView.setBackgroundColor(mContext.getResources().getColor(colors[position%(colors.length)]));
-        holder.mTextView.setText(position+"");
+        holder.mTextView.setText(position + "");
         // TODO: 2016/6/14 15:40 需要启动那个子视图 ,该视图还没有写
     }
 
     @Override
     public int getItemCount() {
-        return colors.length*2;
+        return colors.length * 2;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mTextView;
 
-        public ViewHolder(TextView itemView) {
-            super(itemView);
-            mTextView = itemView;
+        public ViewHolder(TextView view) {
+            super(view);
+            mTextView = view;
         }
     }
 }
