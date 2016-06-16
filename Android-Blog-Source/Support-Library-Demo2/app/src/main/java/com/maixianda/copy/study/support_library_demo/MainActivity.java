@@ -1,6 +1,7 @@
 package com.maixianda.copy.study.support_library_demo;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new InfoDetailsFragment());
         fragments.add(new ShareFragment());
         fragments.add(new AgendaFragment());
-        // TODO: 2016/6/14 15:28 编写各种fragment
         //endregion 初始化ViewPager的数据集
         //region 创建ViewPager的adapter
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(),fragments,titles);

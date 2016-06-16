@@ -1,6 +1,7 @@
 package com.maixianda.copy.study.support_library_demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mTextView.setBackgroundColor(mContext.getResources().getColor(colors[position%(colors.length)]));
         holder.mTextView.setText(position + "");
         // TODO: 2016/6/14 15:40 需要启动那个子视图 ,该视图还没有写
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext,SubActivity.class));
+            }
+        });
     }
 
     @Override
