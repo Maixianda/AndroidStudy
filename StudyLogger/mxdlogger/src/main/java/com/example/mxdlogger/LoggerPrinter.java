@@ -1,5 +1,9 @@
 package com.example.mxdlogger;
 
+import android.support.v7.widget.ThemedSpinnerAdapter;
+
+import java.util.StringTokenizer;
+
 /**
  * Created by Administrator on 2016/8/24.
  * 说明:           logger的具体日志打印类
@@ -17,7 +21,20 @@ public class LoggerPrinter implements Printer {
     private static final int WARN = 5;
     //endregion 日志级别
 
-
+    //region 画图
+    /**
+     * Drawing toolbox
+     */
+    private static final char TOP_LEFT_CORNER = '╔';
+    private static final char BOTTOM_LEFT_CORNER = '╚';
+    private static final char MIDDLE_CORNER = '╟';
+    private static final char HORIZONTAL_DOUBLE_LINE = '║';
+    private static final String DOUBLE_DIVIDER = "════════════════════════════════════════════";
+    private static final String SINGLE_DIVIDER = "────────────────────────────────────────────";
+    private static final String TOP_BORDER = TOP_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
+    private static final String BOTTOM_BORDER = BOTTOM_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
+    private static final String MIDDLE_BORDER = MIDDLE_CORNER + SINGLE_DIVIDER + SINGLE_DIVIDER;
+    //endregion 画图
     //region 成员变量
     /**
      * It is used to determine log settings such as method count, thread info visibility
@@ -29,6 +46,10 @@ public class LoggerPrinter implements Printer {
      * 为每个线程本地化一个tag
      */
     private final ThreadLocal<String> localTag = new ThreadLocal<>();
+    /**
+     * 为每个线程本地化MethodCount
+     */
+    private final ThreadLocal<Integer> localMethodCount = new ThreadLocal<>();
     /**
      * tag is used for the Log, the name is a little different
      * in order to differentiate the logs easily with the filter
@@ -57,6 +78,82 @@ public class LoggerPrinter implements Printer {
         String tag = getTag();
         String msg = createMessage(message,args);
         log(debug,tag,message,throwable);
+    }
+
+    private void log(int priority, String tag, String message, Throwable throwable) {
+        if (settings.getLogLevel() == LogLevel.NONE)
+        {
+            return;
+        }
+        if (null != throwable && message != null)
+        {
+            message += " : " + Helper.getStackTraceString(throwable);
+        }
+        if (null != throwable && null == message)
+        {
+            message = Helper.getStackTraceString(throwable);
+        }
+        if (null == message)
+        {
+            message = "没有消息或者异常被设置";
+        }
+        int methodCount = getMethodCount();
+        if (Helper.isEmpty(message))
+        {
+            message = "字符串为空或者0长度";
+        }
+        logTopBoreder(priority,tag);
+    }
+
+    private void logTopBoreder(int priority, String tag) {
+        logChunk(priority,tag,TOP_BORDER);
+    }
+
+    private void logChunk(int priority, String tag, String chunk) {
+        String finalTag = formatTag(tag);
+        switch (priority)
+        {
+            case ERROR :
+                settings.getLogAdapter().e(finalTag,chunk);
+                break;
+            case DEBUG :
+                settings.getLogAdapter().d(finalTag,chunk);
+                break;
+            case ASSERT :
+                settings.getLogAdapter().wtf(finalTag,chunk);
+                break;
+            case INFO :
+                settings.getLogAdapter().i(finalTag,chunk);
+                break;
+            case VERBOSE :
+                settings.getLogAdapter().v(finalTag,chunk);
+                break;
+            case WARN :
+                settings.getLogAdapter().w(finalTag,chunk);
+        }
+    }
+
+    private String formatTag(String tag) {
+        if (!Helper.isEmpty(tag) && !Helper.equals(this.tag,tag))
+        {
+            return this.tag+"-"+tag;
+        }
+        return this.tag;
+    }
+
+    private int getMethodCount() {
+        Integer count = localMethodCount.get();
+        int result = settings.getMethodCount();
+        if (null != count )
+        {
+            localMethodCount.remove();
+            result = count;
+        }
+        if (result < 0)
+        {
+            throw new IllegalStateException("方法数不能是负数");
+        }
+        return result;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.example.mxdlogger;
 
+import android.util.Log;
+
 /**
  * Created by Administrator on 2016/8/24.
  * 说明:           日志设置类
@@ -10,11 +12,13 @@ public class Settings {
     // TODO: 2016/8/24 15:39 先完善 d() 函数
 
     //region 成员变量
+    private int methodCount = 2;
     /**
      * Determines to how logs will be printed
      * 根据日志级别,设置日志打印的样式
      */
     private LogLevel logLevel = LogLevel.FULL;
+    private LogAdapter logAdapter;
 
     public Settings logLevel(LogLevel logLevel) {
         this.logLevel = logLevel;
@@ -23,6 +27,18 @@ public class Settings {
 
     public LogLevel getLogLevel() {
         return logLevel;
+    }
+
+    public int getMethodCount() {
+        return methodCount;
+    }
+
+    public LogAdapter getLogAdapter() {
+        if (null == logAdapter)
+        {
+            logAdapter = new AndroidLogAdapter();
+        }
+        return logAdapter;
     }
     //endregion 成员变量
 
