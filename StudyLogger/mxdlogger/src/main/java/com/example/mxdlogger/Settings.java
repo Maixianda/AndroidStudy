@@ -19,7 +19,13 @@ public class Settings {
      */
     private LogLevel logLevel = LogLevel.FULL;
     private LogAdapter logAdapter;
+    private boolean showThreadInfo = true;
 
+    public Settings hideThreadInfo()
+    {
+        showThreadInfo = false;
+        return this;
+    }
     public Settings logLevel(LogLevel logLevel) {
         this.logLevel = logLevel;
         return this;
@@ -39,6 +45,10 @@ public class Settings {
             logAdapter = new AndroidLogAdapter();
         }
         return logAdapter;
+    }
+
+    public boolean isShowThreadInfo() {
+        return showThreadInfo;
     }
     //endregion 成员变量
 

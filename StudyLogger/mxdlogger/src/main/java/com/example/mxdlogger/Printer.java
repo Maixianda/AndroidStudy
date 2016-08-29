@@ -12,4 +12,6 @@ public interface Printer {
     // TODO: 2016/8/24 15:35 先完善d()函数
     void d(String message,Object... args);
     void d(Object object);
+
+    Settings init(String tag);
 }
